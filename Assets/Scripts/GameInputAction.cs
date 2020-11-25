@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scenes/InputSystem/GameInputAction.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/GameInputAction.inputactions'
 
 using System;
 using System.Collections;
@@ -103,6 +103,52 @@ public class @GameInputAction : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""MouseMove"",
+            ""id"": ""9706ee5d-762f-441d-9006-eac627a893f7"",
+            ""actions"": [
+                {
+                    ""name"": ""Up/Down"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6027cff4-515c-4df3-b916-66eff0570ccd"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Left/Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""66fe8a56-bff2-4949-9307-9066b2533ccf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""094dba63-d86f-487a-babc-040a5225a8dd"",
+                    ""path"": ""<Mouse>/delta/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up/Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c7af73e-242e-46cf-9c64-a7d927195343"",
+                    ""path"": ""<Mouse>/delta/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left/Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -111,6 +157,10 @@ public class @GameInputAction : IInputActionCollection, IDisposable
         m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
         m_Character_Move = m_Character.FindAction("Move", throwIfNotFound: true);
         m_Character_Jump = m_Character.FindAction("Jump", throwIfNotFound: true);
+        // MouseMove
+        m_MouseMove = asset.FindActionMap("MouseMove", throwIfNotFound: true);
+        m_MouseMove_UpDown = m_MouseMove.FindAction("Up/Down", throwIfNotFound: true);
+        m_MouseMove_LeftRight = m_MouseMove.FindAction("Left/Right", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -197,9 +247,55 @@ public class @GameInputAction : IInputActionCollection, IDisposable
         }
     }
     public CharacterActions @Character => new CharacterActions(this);
+
+    // MouseMove
+    private readonly InputActionMap m_MouseMove;
+    private IMouseMoveActions m_MouseMoveActionsCallbackInterface;
+    private readonly InputAction m_MouseMove_UpDown;
+    private readonly InputAction m_MouseMove_LeftRight;
+    public struct MouseMoveActions
+    {
+        private @GameInputAction m_Wrapper;
+        public MouseMoveActions(@GameInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @UpDown => m_Wrapper.m_MouseMove_UpDown;
+        public InputAction @LeftRight => m_Wrapper.m_MouseMove_LeftRight;
+        public InputActionMap Get() { return m_Wrapper.m_MouseMove; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MouseMoveActions set) { return set.Get(); }
+        public void SetCallbacks(IMouseMoveActions instance)
+        {
+            if (m_Wrapper.m_MouseMoveActionsCallbackInterface != null)
+            {
+                @UpDown.started -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnUpDown;
+                @UpDown.performed -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnUpDown;
+                @UpDown.canceled -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnUpDown;
+                @LeftRight.started -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnLeftRight;
+                @LeftRight.performed -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnLeftRight;
+                @LeftRight.canceled -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnLeftRight;
+            }
+            m_Wrapper.m_MouseMoveActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @UpDown.started += instance.OnUpDown;
+                @UpDown.performed += instance.OnUpDown;
+                @UpDown.canceled += instance.OnUpDown;
+                @LeftRight.started += instance.OnLeftRight;
+                @LeftRight.performed += instance.OnLeftRight;
+                @LeftRight.canceled += instance.OnLeftRight;
+            }
+        }
+    }
+    public MouseMoveActions @MouseMove => new MouseMoveActions(this);
     public interface ICharacterActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+    }
+    public interface IMouseMoveActions
+    {
+        void OnUpDown(InputAction.CallbackContext context);
+        void OnLeftRight(InputAction.CallbackContext context);
     }
 }

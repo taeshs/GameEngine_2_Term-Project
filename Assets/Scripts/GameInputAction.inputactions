@@ -90,6 +90,52 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "MouseMove",
+            "id": "9706ee5d-762f-441d-9006-eac627a893f7",
+            "actions": [
+                {
+                    "name": "Up/Down",
+                    "type": "PassThrough",
+                    "id": "6027cff4-515c-4df3-b916-66eff0570ccd",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Left/Right",
+                    "type": "Button",
+                    "id": "66fe8a56-bff2-4949-9307-9066b2533ccf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "094dba63-d86f-487a-babc-040a5225a8dd",
+                    "path": "<Mouse>/delta/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Up/Down",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c7af73e-242e-46cf-9c64-a7d927195343",
+                    "path": "<Mouse>/delta/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left/Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
