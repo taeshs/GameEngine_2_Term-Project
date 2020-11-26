@@ -96,9 +96,11 @@ public class Enemy : MonoBehaviour, IDamagable
                 }
             }
         }
+
     }
     private void Chase()
     {
+        
         // 경보 수치 만들어서 chasing 동안 경보수치 ++;
         // 조건문으로 경보수치가 일정 수치 이상이면 _state 바꾸기
 
