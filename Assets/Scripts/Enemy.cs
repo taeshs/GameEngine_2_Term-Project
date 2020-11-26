@@ -44,6 +44,7 @@ public class Enemy : MonoBehaviour, IDamagable
             else if (_state == EnemyState.Finding) Search();
             else if (_state == EnemyState.Chasing) Chase();
             else if (_state == EnemyState.Attacking) Attack();
+            else if (_state == EnemyState.patroling) patrol();
 
             if (GameManager.Instance.State == State.GameEnded)
             {
@@ -84,13 +85,49 @@ public class Enemy : MonoBehaviour, IDamagable
 
         //_agent.isStopped = false;
 
+        
+
+        
+        var dir = ((_player.transform.position - transform.position).normalized);
+        var dot = Vector3.Dot(transform.forward, dir);
+        // if( alert >= maxalert) _agent.SetDestination(_player.transform.position);   else
+
+        //if ((_player.transform.position - transform.position).magnitude < attackRange)
+        //{
+        //    _state = EnemyState.Attacking;
+        //}
+
+        //enemystate
+
+        if (dot <= sightLevel)
+        {
+            _state = EnemyState.Finding;
+        }
+        if ((_player.transform.position - transform.position).magnitude > sightLength * 2)
+        {
+            _state = EnemyState.Finding;
+        }
+        else
+        {
+            print($"Distance: {Vector3.Distance(transform.position, _player.transform.position)}, TargetPosition: {_player.transform.position}");
+            _agent.SetDestination(_player.transform.position);
+        }
+    }
+
+    private void patrol()
+    {
+        // 경보 수치 만들어서 chasing 동안 경보수치 ++;
+        // 조건문으로 경보수치가 일정 수치 이상이면 _state 바꾸기
+
+        //_agent.isStopped = false;
+
         //if ((_player.transform.position - transform.position).magnitude < attackRange)
         //{
         //    _state = EnemyState.Attacking;
         //}
         var dir = ((_player.transform.position - transform.position).normalized);
         var dot = Vector3.Dot(transform.forward, dir);
-        if(dot <= sightLevel)
+        if (dot <= sightLevel)
         {
             _state = EnemyState.Finding;
         }
