@@ -5,6 +5,5 @@ public enum EnemyState
     Finding,
     Chasing,
     Attacking,
-    Dead,
-    patroling
+    Dead
 }
