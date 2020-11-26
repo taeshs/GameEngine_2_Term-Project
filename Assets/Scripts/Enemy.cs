@@ -14,6 +14,10 @@ public class Enemy : MonoBehaviour, IDamagable
     [SerializeField] private float attackPower = 1f;
     [SerializeField] private LayerMask layerToCast;
     [SerializeField] private Stat status;
+    [SerializeField] private Vector3 spawnPosition;
+    [SerializeField] private Vector3 patrolRadius;
+    [SerializeField] private GameObject patrolA;
+    [SerializeField] private GameObject patrolB;
 
     private Player _player;
     private NavMeshAgent _agent;
@@ -23,6 +27,11 @@ public class Enemy : MonoBehaviour, IDamagable
     public float SightLength => sightLength;
     public float Hp => status.Hp;
     public float MaxHp => status.MaxHp;
+
+    public bool patrol = true;
+
+    public Vector3 SpawnPoint => spawnPosition;
+    public Vector3 PatrolRadius => patrolRadius;
 
     private void Awake()
     {
@@ -58,8 +67,19 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private void Search()
     {
-        //시야각 로직
         
+
+        if(patrol)
+        {
+            _agent.SetDestination(patrolA.transform.position);
+        }
+        else
+        { 
+            _agent.SetDestination(patrolB.transform.position);
+        }
+
+        //시야각 로직
+
         var dir = ((_player.transform.position - transform.position).normalized);
         var dot = Vector3.Dot(transform.forward, dir);
 
@@ -76,24 +96,6 @@ public class Enemy : MonoBehaviour, IDamagable
                 }
             }
         }
-
-
-        if (dot <= sightLevel)
-        {
-            _state = EnemyState.Finding;
-        }
-        if ((_player.transform.position - transform.position).magnitude > sightLength * 2)
-        {
-            _state = EnemyState.Finding;
-        }
-        else
-        {
-            print($"Distance: {Vector3.Distance(transform.position, _player.transform.position)}, TargetPosition: {_player.transform.position}");
-            _agent.SetDestination(_player.transform.position);
-        }
-
-
-
     }
     private void Chase()
     {
