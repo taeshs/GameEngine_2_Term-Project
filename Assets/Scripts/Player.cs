@@ -1,4 +1,6 @@
-﻿
+﻿using System.Runtime.CompilerServices;
+using System.Data;
+
     using System;
     using System.Collections;
     using System.Linq;
@@ -25,6 +27,8 @@ public class Player : MonoBehaviour, IDamagable
 
     public float Mp => stat.MaxHp;
     public float MaxMp => stat.MaxMp;
+
+    public float Alert => stat.Alert;
 
     public Stat Stat => stat;
 
@@ -75,6 +79,12 @@ public class Player : MonoBehaviour, IDamagable
     {
         if (!_isdamagable) return;
         _damageRoutine = StartCoroutine(DamageRoutine(damageAmount));
+    }
+
+    public void AddAlert(float Amount)
+    {
+        stat.AddAlert(Amount);
+        print(stat.Alert);
     }
 
     private IEnumerator DamageRoutine(float damageAmount)

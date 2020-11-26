@@ -11,14 +11,18 @@
         [SerializeField] private float _attackRate;
         [SerializeField] private float _attackPower;
         [SerializeField] private float _expToLevelup;
+        [SerializeField] private float _maxalert;
+
 
         private float _hp;
         private float _mp;
         private float _exp;
         private float _level;
+        private float _alert;
+        //private float _maxalert;
 
         public Stat(float maxHp = 10, float maxMp = 10, float shootSpeed = 40f, float attackRate = 0.1f,
-            float attackPower = 0.1f, float expToLevelup = 10f, float exp = 0f, float level = 1)
+            float attackPower = 0.1f, float expToLevelup = 10f, float exp = 0f, float level = 1, float alert = 0,float maxalert =100)
         {
             _maxHp = maxHp;
             _hp = maxHp;
@@ -30,6 +34,8 @@
             _expToLevelup = expToLevelup;
             _exp = exp;
             _level = level;
+            _alert = alert;
+            _maxalert = maxalert;
         }
 
         public float MaxHp => _maxHp;
@@ -45,6 +51,11 @@
         public float AttackRate => _attackRate;
 
         public float AttackPower => _attackPower;
+
+        public float Alert => _alert;
+        
+        public float MaxAlert =>_maxalert; 
+
 
         public float Exp
         {
@@ -77,5 +88,10 @@
         public void AddHp(float hpAmount)
         {
             _hp = Mathf.Clamp(_hp + hpAmount, 0, _maxHp);
+        }
+
+         public void AddAlert(float AlertAmount)
+        {
+            _alert = Mathf.Clamp(_alert + AlertAmount, 0, _maxalert);
         }
     }

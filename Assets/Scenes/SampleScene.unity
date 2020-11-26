@@ -160,6 +160,7 @@ MonoBehaviour:
     _attackRate: 0
     _attackPower: 0
     _expToLevelup: 0
+    _maxalert: 0
 --- !u!1 &395806222
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +562,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806867126}
-  m_Mesh: {fileID: 1881854732}
+  m_Mesh: {fileID: 1085438960}
 --- !u!23 &806867130
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -735,7 +736,7 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!43 &1881854732
+--- !u!43 &1085438960
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1049,7 +1050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  cam: {fileID: 963194227}
+  cam: {fileID: 0}
   stat:
     _maxHp: 10
     _maxMp: 0
@@ -1057,6 +1058,7 @@ MonoBehaviour:
     _attackRate: 0
     _attackPower: 0
     _expToLevelup: 0
+    _maxalert: 100
   noDamageTime: 0.5
 --- !u!4 &128654479553287097
 Transform:

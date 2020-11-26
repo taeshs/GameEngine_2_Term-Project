@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour, IDamagable
     public float SightLength => sightLength;
     public float Hp => status.Hp;
     public float MaxHp => status.MaxHp;
+    public float Alert => status.Alert;
+    public float MaxAlert => status.MaxAlert;
 
     private void Awake()
     {
@@ -104,6 +106,13 @@ public class Enemy : MonoBehaviour, IDamagable
 
         var dir = ((_player.transform.position - transform.position).normalized);
         var dot = Vector3.Dot(transform.forward, dir);
+    
+        _player.AddAlert(5);
+
+        
+
+        //print(_player.Alert);
+
         // if( alert >= maxalert) _agent.SetDestination(_player.transform.position);   else
 
         //if ((_player.transform.position - transform.position).magnitude < attackRange)
@@ -112,12 +121,15 @@ public class Enemy : MonoBehaviour, IDamagable
         //}
 
         //enemystate
-
-        if (dot <= sightLevel)
+        if (_player.Alert >= MaxAlert)
+        {
+            _agent.SetDestination(_player.transform.position);
+        } 
+        else if (dot <= sightLevel)
         {
             _state = EnemyState.Finding;
         }
-        if ((_player.transform.position - transform.position).magnitude > sightLength * 2)
+        else if ((_player.transform.position - transform.position).magnitude > sightLength * 2)
         {
             _state = EnemyState.Finding;
         }
