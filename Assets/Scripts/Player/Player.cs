@@ -85,7 +85,7 @@ public class Player : MonoBehaviour, IDamagable
     public void AddAlert(float Amount)
     {
         stat.AddAlert(Amount);
-        print(stat.Alert);
+        //print(stat.Alert);
     }
 
     private IEnumerator DamageRoutine(float damageAmount)
