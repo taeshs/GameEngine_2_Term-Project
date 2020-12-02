@@ -105,9 +105,9 @@
                 },
                 {
                     "name": "Left/Right",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "66fe8a56-bff2-4949-9307-9066b2533ccf",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 }
