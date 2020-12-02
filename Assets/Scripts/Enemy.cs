@@ -69,15 +69,16 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private void Search()
     {
-        
 
-        if(patrol)
+        if (patrol)
         {
             _agent.SetDestination(patrolA.transform.position);
+            print("A");
         }
-        else
-        { 
+        if (!patrol)
+        {
             _agent.SetDestination(patrolB.transform.position);
+            print("B");
         }
 
         //시야각 로직
@@ -90,28 +91,25 @@ public class Enemy : MonoBehaviour, IDamagable
             if (Physics.Raycast(transform.position, dir, out var raycastsHit, sightLength, layerToCast))
             {
                 var hitsObject = raycastsHit.collider.gameObject;
-                print($"Distancess: {Vector3.Distance(transform.position, _player.transform.position)}, TargetPosition: {_player.transform.position}");
+                //print($"Distancess: {Vector3.Distance(transform.position, _player.transform.position)}, TargetPosition: {_player.transform.position}");
                 if (hitsObject.CompareTag("play"))
                 {
-                    print($"Distance: {Vector3.Distance(transform.position, _player.transform.position)}, TargetPosition: {_player.transform.position}");
+                    //print($"Distance: {Vector3.Distance(transform.position, _player.transform.position)}, TargetPosition: {_player.transform.position}");
                     _state = EnemyState.Chasing;
                 }
             }
         }
-
     }
     private void Chase()
     {
-        
-        // 경보 수치 만들어서 chasing 동안 경보수치 ++;
-        // 조건문으로 경보수치가 일정 수치 이상이면 _state 바꾸기
 
         //_agent.isStopped = false;
 
         var dir = ((_player.transform.position - transform.position).normalized);
         var dot = Vector3.Dot(transform.forward, dir);
-    
-        _player.AddAlert(5);
+
+        float timeAlert = 5.0f * Time.deltaTime;
+        _player.AddAlert(timeAlert);
 
         
 
@@ -125,21 +123,18 @@ public class Enemy : MonoBehaviour, IDamagable
         //}
 
         //enemystate
-        if (_player.Alert >= MaxAlert)
+        if (_player.Alert >= _player.Stat.MaxAlert)
         {
+            //print("chase");
             _agent.SetDestination(_player.transform.position);
         } 
-        else if (dot <= sightLevel)
-        {
-            _state = EnemyState.Finding;
-        }
-        else if ((_player.transform.position - transform.position).magnitude > sightLength * 2)
+        else if (dot <= sightLevel || (_player.transform.position - transform.position).magnitude > sightLength * 2)
         {
             _state = EnemyState.Finding;
         }
         else
         {
-            print($"Distance: {Vector3.Distance(transform.position, _player.transform.position)}, TargetPosition: {_player.transform.position}");
+            //print($"Distance: {Vector3.Distance(transform.position, _player.transform.position)}, TargetPosition: {_player.transform.position}");
             _agent.SetDestination(_player.transform.position);
         }
     }

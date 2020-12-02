@@ -51,6 +51,7 @@ public class Player : MonoBehaviour, IDamagable
     {
         _isdamagable = true;
         stat.AddHp(stat.MaxHp);
+        stat.SetAlert(0);
     }
 
     private void OnDisable()
