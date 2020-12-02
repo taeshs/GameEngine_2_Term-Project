@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour, IDamagable
     [SerializeField] private float sightLength = 4f;
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private float attackRate = 0.5f;
-    [SerializeField] private float attackPower = 1f;
+    [SerializeField] private float attackPower = 0.1f;
     [SerializeField] private LayerMask layerToCast;
     [SerializeField] private Stat status;
     [SerializeField] private Vector3 spawnPosition;
@@ -115,16 +115,18 @@ public class Enemy : MonoBehaviour, IDamagable
 
 
 
-        //if ((_player.transform.position - transform.position).magnitude < attackRange)
-        //{
-        //    _state = EnemyState.Attacking;
-        //}
-
+        
         //enemystate
         if (_player.Alert >= _player.Stat.MaxAlert)
         {
             //print("chase");
             _agent.SetDestination(_player.transform.position);
+
+            if ((_player.transform.position - transform.position).magnitude < attackRange)
+             {
+            _state = EnemyState.Attacking;
+             }
+
         } 
         else if (dot <= sightLevel || (_player.transform.position - transform.position).magnitude > sightLength * 2)
         {
@@ -139,6 +141,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
     private void Attack()
     {
+        //print("공격");
         _agent.isStopped = true;
 
         if ((_player.transform.position - transform.position).magnitude < attackRange)
