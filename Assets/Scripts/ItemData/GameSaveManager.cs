@@ -1,8 +1,8 @@
-namespace Scenes.Data
+namespace Scripts.Data
 {
     using System.IO;
     using System.Text;
-    using Inventory.Scripts;
+    //using Inventory.Scripts;
     using KPU;
     using KPU.Manager;
     using UnityEngine;

@@ -1,59 +1,62 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CharacterRotationController : MonoBehaviour, GameInputAction.IMouseMoveActions
+namespace Assets.Scripts.InputActions
 {
-    public float mouseSensitivity = 10f;
-    private float _mouseYDelta;
-    private float _mouseXDelta;
-
-    private float _xRot;
-    private float _yRot;
-
-    private GameInputAction _actionControl;
-
-    public void OnUpDown(InputAction.CallbackContext context)
+    public class CharacterRotationController : MonoBehaviour, GameInputAction.IMouseMoveActions
     {
-        _mouseYDelta = context.ReadValue<float>();
-    }
+        public float mouseSensitivity = 10f;
+        private float _mouseYDelta;
+        private float _mouseXDelta;
 
-    public void OnLeftRight(InputAction.CallbackContext context)
-    {
-        _mouseXDelta = context.ReadValue<float>();
-    }
+        private float _xRot;
+        private float _yRot;
 
+        private GameInputAction _actionControl;
 
-
-    void Awake()
-    {
-
-    }
-
-    private void Start()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    void OnEnable()
-    {
-        if (_actionControl == null)
+        public void OnUpDown(InputAction.CallbackContext context)
         {
-            _actionControl = new GameInputAction();
-            _actionControl.MouseMove.SetCallbacks(this);
+            _mouseYDelta = context.ReadValue<float>();
         }
 
-        _actionControl.MouseMove.Enable();
+        public void OnLeftRight(InputAction.CallbackContext context)
+        {
+            _mouseXDelta = context.ReadValue<float>();
+        }
+
+
+
+        void Awake()
+        {
+
+        }
+
+        private void Start()
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        void OnEnable()
+        {
+            if (_actionControl == null)
+            {
+                _actionControl = new GameInputAction();
+                _actionControl.MouseMove.SetCallbacks(this);
+            }
+
+            _actionControl.MouseMove.Enable();
+        }
+
+
+        private void Update()
+        {
+            var mouseX = _mouseXDelta * Time.deltaTime * mouseSensitivity;
+            var mouseY = _mouseYDelta * Time.deltaTime * mouseSensitivity;
+
+            transform.Rotate(new Vector3(0, mouseX * 2, 0));
+        }
     }
 
-
-    private void Update()
-    {
-        var mouseX = _mouseXDelta * Time.deltaTime * mouseSensitivity;
-        var mouseY = _mouseYDelta * Time.deltaTime * mouseSensitivity;
-
-        transform.Rotate(new Vector3(0, mouseX * 2, 0));
-    }
 }

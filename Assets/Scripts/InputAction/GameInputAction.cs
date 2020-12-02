@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/GameInputAction.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/InputAction/GameInputAction.inputactions'
 
 using System;
 using System.Collections;
@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class @GameInputAction : IInputActionCollection, IDisposable
+namespace Assets.Scripts.InputActions
 {
-    public InputActionAsset asset { get; }
-    public @GameInputAction()
+    public class @GameInputAction : IInputActionCollection, IDisposable
     {
-        asset = InputActionAsset.FromJson(@"{
+        public InputActionAsset asset { get; }
+        public @GameInputAction()
+        {
+            asset = InputActionAsset.FromJson(@"{
     ""name"": ""GameInputAction"",
     ""maps"": [
         {
@@ -118,9 +120,9 @@ public class @GameInputAction : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Left/Right"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""66fe8a56-bff2-4949-9307-9066b2533ccf"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -153,149 +155,155 @@ public class @GameInputAction : IInputActionCollection, IDisposable
     ],
     ""controlSchemes"": []
 }");
+            // Character
+            m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
+            m_Character_Move = m_Character.FindAction("Move", throwIfNotFound: true);
+            m_Character_Jump = m_Character.FindAction("Jump", throwIfNotFound: true);
+            // MouseMove
+            m_MouseMove = asset.FindActionMap("MouseMove", throwIfNotFound: true);
+            m_MouseMove_UpDown = m_MouseMove.FindAction("Up/Down", throwIfNotFound: true);
+            m_MouseMove_LeftRight = m_MouseMove.FindAction("Left/Right", throwIfNotFound: true);
+        }
+
+        public void Dispose()
+        {
+            UnityEngine.Object.Destroy(asset);
+        }
+
+        public InputBinding? bindingMask
+        {
+            get => asset.bindingMask;
+            set => asset.bindingMask = value;
+        }
+
+        public ReadOnlyArray<InputDevice>? devices
+        {
+            get => asset.devices;
+            set => asset.devices = value;
+        }
+
+        public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+        public bool Contains(InputAction action)
+        {
+            return asset.Contains(action);
+        }
+
+        public IEnumerator<InputAction> GetEnumerator()
+        {
+            return asset.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void Enable()
+        {
+            asset.Enable();
+        }
+
+        public void Disable()
+        {
+            asset.Disable();
+        }
+
+        IEnumerator<UnityEngine.InputSystem.InputAction> IEnumerable<UnityEngine.InputSystem.InputAction>.GetEnumerator()
+        {
+            return ((IEnumerable<UnityEngine.InputSystem.InputAction>)m_Character).GetEnumerator();
+        }
+
         // Character
-        m_Character = asset.FindActionMap("Character", throwIfNotFound: true);
-        m_Character_Move = m_Character.FindAction("Move", throwIfNotFound: true);
-        m_Character_Jump = m_Character.FindAction("Jump", throwIfNotFound: true);
+        private readonly InputActionMap m_Character;
+        private ICharacterActions m_CharacterActionsCallbackInterface;
+        private readonly InputAction m_Character_Move;
+        private readonly InputAction m_Character_Jump;
+        public struct CharacterActions
+        {
+            private @GameInputAction m_Wrapper;
+            public CharacterActions(@GameInputAction wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_Character_Move;
+            public InputAction @Jump => m_Wrapper.m_Character_Jump;
+            public InputActionMap Get() { return m_Wrapper.m_Character; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(CharacterActions set) { return set.Get(); }
+            public void SetCallbacks(ICharacterActions instance)
+            {
+                if (m_Wrapper.m_CharacterActionsCallbackInterface != null)
+                {
+                    @Move.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMove;
+                    @Move.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMove;
+                    @Move.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMove;
+                    @Jump.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnJump;
+                    @Jump.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnJump;
+                    @Jump.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnJump;
+                }
+                m_Wrapper.m_CharacterActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Move.started += instance.OnMove;
+                    @Move.performed += instance.OnMove;
+                    @Move.canceled += instance.OnMove;
+                    @Jump.started += instance.OnJump;
+                    @Jump.performed += instance.OnJump;
+                    @Jump.canceled += instance.OnJump;
+                }
+            }
+        }
+        public CharacterActions @Character => new CharacterActions(this);
+
         // MouseMove
-        m_MouseMove = asset.FindActionMap("MouseMove", throwIfNotFound: true);
-        m_MouseMove_UpDown = m_MouseMove.FindAction("Up/Down", throwIfNotFound: true);
-        m_MouseMove_LeftRight = m_MouseMove.FindAction("Left/Right", throwIfNotFound: true);
-    }
-
-    public void Dispose()
-    {
-        UnityEngine.Object.Destroy(asset);
-    }
-
-    public InputBinding? bindingMask
-    {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
-    }
-
-    public ReadOnlyArray<InputDevice>? devices
-    {
-        get => asset.devices;
-        set => asset.devices = value;
-    }
-
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-    public bool Contains(InputAction action)
-    {
-        return asset.Contains(action);
-    }
-
-    public IEnumerator<InputAction> GetEnumerator()
-    {
-        return asset.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    public void Enable()
-    {
-        asset.Enable();
-    }
-
-    public void Disable()
-    {
-        asset.Disable();
-    }
-
-    // Character
-    private readonly InputActionMap m_Character;
-    private ICharacterActions m_CharacterActionsCallbackInterface;
-    private readonly InputAction m_Character_Move;
-    private readonly InputAction m_Character_Jump;
-    public struct CharacterActions
-    {
-        private @GameInputAction m_Wrapper;
-        public CharacterActions(@GameInputAction wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Character_Move;
-        public InputAction @Jump => m_Wrapper.m_Character_Jump;
-        public InputActionMap Get() { return m_Wrapper.m_Character; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CharacterActions set) { return set.Get(); }
-        public void SetCallbacks(ICharacterActions instance)
+        private readonly InputActionMap m_MouseMove;
+        private IMouseMoveActions m_MouseMoveActionsCallbackInterface;
+        private readonly InputAction m_MouseMove_UpDown;
+        private readonly InputAction m_MouseMove_LeftRight;
+        public struct MouseMoveActions
         {
-            if (m_Wrapper.m_CharacterActionsCallbackInterface != null)
+            private @GameInputAction m_Wrapper;
+            public MouseMoveActions(@GameInputAction wrapper) { m_Wrapper = wrapper; }
+            public InputAction @UpDown => m_Wrapper.m_MouseMove_UpDown;
+            public InputAction @LeftRight => m_Wrapper.m_MouseMove_LeftRight;
+            public InputActionMap Get() { return m_Wrapper.m_MouseMove; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(MouseMoveActions set) { return set.Get(); }
+            public void SetCallbacks(IMouseMoveActions instance)
             {
-                @Move.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMove;
-                @Move.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnMove;
-                @Jump.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnJump;
-                @Jump.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnJump;
-                @Jump.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnJump;
-            }
-            m_Wrapper.m_CharacterActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Move.started += instance.OnMove;
-                @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
-                @Jump.started += instance.OnJump;
-                @Jump.performed += instance.OnJump;
-                @Jump.canceled += instance.OnJump;
+                if (m_Wrapper.m_MouseMoveActionsCallbackInterface != null)
+                {
+                    @UpDown.started -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnUpDown;
+                    @UpDown.performed -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnUpDown;
+                    @UpDown.canceled -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnUpDown;
+                    @LeftRight.started -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnLeftRight;
+                    @LeftRight.performed -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnLeftRight;
+                    @LeftRight.canceled -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnLeftRight;
+                }
+                m_Wrapper.m_MouseMoveActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @UpDown.started += instance.OnUpDown;
+                    @UpDown.performed += instance.OnUpDown;
+                    @UpDown.canceled += instance.OnUpDown;
+                    @LeftRight.started += instance.OnLeftRight;
+                    @LeftRight.performed += instance.OnLeftRight;
+                    @LeftRight.canceled += instance.OnLeftRight;
+                }
             }
         }
-    }
-    public CharacterActions @Character => new CharacterActions(this);
-
-    // MouseMove
-    private readonly InputActionMap m_MouseMove;
-    private IMouseMoveActions m_MouseMoveActionsCallbackInterface;
-    private readonly InputAction m_MouseMove_UpDown;
-    private readonly InputAction m_MouseMove_LeftRight;
-    public struct MouseMoveActions
-    {
-        private @GameInputAction m_Wrapper;
-        public MouseMoveActions(@GameInputAction wrapper) { m_Wrapper = wrapper; }
-        public InputAction @UpDown => m_Wrapper.m_MouseMove_UpDown;
-        public InputAction @LeftRight => m_Wrapper.m_MouseMove_LeftRight;
-        public InputActionMap Get() { return m_Wrapper.m_MouseMove; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MouseMoveActions set) { return set.Get(); }
-        public void SetCallbacks(IMouseMoveActions instance)
+        public MouseMoveActions @MouseMove => new MouseMoveActions(this);
+        public interface ICharacterActions
         {
-            if (m_Wrapper.m_MouseMoveActionsCallbackInterface != null)
-            {
-                @UpDown.started -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnUpDown;
-                @UpDown.performed -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnUpDown;
-                @UpDown.canceled -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnUpDown;
-                @LeftRight.started -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnLeftRight;
-                @LeftRight.performed -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnLeftRight;
-                @LeftRight.canceled -= m_Wrapper.m_MouseMoveActionsCallbackInterface.OnLeftRight;
-            }
-            m_Wrapper.m_MouseMoveActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @UpDown.started += instance.OnUpDown;
-                @UpDown.performed += instance.OnUpDown;
-                @UpDown.canceled += instance.OnUpDown;
-                @LeftRight.started += instance.OnLeftRight;
-                @LeftRight.performed += instance.OnLeftRight;
-                @LeftRight.canceled += instance.OnLeftRight;
-            }
+            void OnMove(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
         }
-    }
-    public MouseMoveActions @MouseMove => new MouseMoveActions(this);
-    public interface ICharacterActions
-    {
-        void OnMove(InputAction.CallbackContext context);
-        void OnJump(InputAction.CallbackContext context);
-    }
-    public interface IMouseMoveActions
-    {
-        void OnUpDown(InputAction.CallbackContext context);
-        void OnLeftRight(InputAction.CallbackContext context);
+        public interface IMouseMoveActions
+        {
+            void OnUpDown(InputAction.CallbackContext context);
+            void OnLeftRight(InputAction.CallbackContext context);
+        }
     }
 }

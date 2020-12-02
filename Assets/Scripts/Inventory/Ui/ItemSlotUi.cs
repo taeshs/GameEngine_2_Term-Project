@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Scenes.Inventory.Scripts.Ui
+namespace Scripts.Inventory.Ui
 {
     using TMPro;
     using UnityEngine.UI;

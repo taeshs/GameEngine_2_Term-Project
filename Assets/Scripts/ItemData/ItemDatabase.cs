@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Scenes.Data
+namespace Scripts.Data
 {
     using System.Collections.Generic;
 

@@ -73,12 +73,12 @@ public class Enemy : MonoBehaviour, IDamagable
         if (patrol)
         {
             _agent.SetDestination(patrolA.transform.position);
-            print("A");
+            //print("A");
         }
         if (!patrol)
         {
             _agent.SetDestination(patrolB.transform.position);
-            print("B");
+            //print("B");
         }
 
         //시야각 로직
@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour, IDamagable
             {
                 var hitsObject = raycastsHit.collider.gameObject;
                 //print($"Distancess: {Vector3.Distance(transform.position, _player.transform.position)}, TargetPosition: {_player.transform.position}");
-                if (hitsObject.CompareTag("play"))
+                if (hitsObject.CompareTag("Player"))
                 {
                     //print($"Distance: {Vector3.Distance(transform.position, _player.transform.position)}, TargetPosition: {_player.transform.position}");
                     _state = EnemyState.Chasing;
@@ -113,9 +113,7 @@ public class Enemy : MonoBehaviour, IDamagable
 
         
 
-        //print(_player.Alert);
 
-        // if( alert >= maxalert) _agent.SetDestination(_player.transform.position);   else
 
         //if ((_player.transform.position - transform.position).magnitude < attackRange)
         //{

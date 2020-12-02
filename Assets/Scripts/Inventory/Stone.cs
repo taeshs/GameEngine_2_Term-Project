@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Scenes.Inventory.Scripts;
-using UnityEngine;
-
-public class Stone : MonoBehaviour
+﻿namespace Scripts.Inventory
 {
-    private void OnTriggerEnter(Collider other)
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+
+    public class Stone : MonoBehaviour
     {
-        if (other.CompareTag("Player"))
+        private void OnTriggerEnter(Collider other)
         {
-            InventoryManager.Instance.AddItem("stone");
-            gameObject.SetActive(false);
+            print("sss");
+            if (other.CompareTag("Player"))
+            {
+                InventoryManager.Instance.AddItem("stone");
+                gameObject.SetActive(false);
+            }
         }
     }
 }

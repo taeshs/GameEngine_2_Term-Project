@@ -1,6 +1,6 @@
-﻿using Scenes.Data;
+﻿using Scripts.Data;
 
-namespace Scenes.Inventory.Scripts
+namespace Scripts.Inventory
 {
     using UnityEngine;
     

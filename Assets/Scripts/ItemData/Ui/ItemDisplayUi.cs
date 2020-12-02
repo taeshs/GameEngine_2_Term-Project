@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Scenes.Data.Ui
+namespace Scripts.Data.Ui
 {
     using System;
     using TMPro;

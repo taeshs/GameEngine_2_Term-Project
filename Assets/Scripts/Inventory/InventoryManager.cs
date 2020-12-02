@@ -1,9 +1,9 @@
-﻿namespace Scenes.Inventory.Scripts
+﻿namespace Scripts.Inventory
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Data;
+    using Scripts.Data;
     using KPU;
     using KPU.Manager;
     using Ui;
@@ -29,21 +29,23 @@
         private void Awake()
         {
             _items = new Dictionary<string, List<ItemData>>();
+            //itemDatabase.ItemDatas.ForEach( _items.Add(itemDatabase.ItemDatas., new List<ItemData>()));
         }
 
-        
+
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.I))
+            /*if (Input.GetKeyDown(KeyCode.I))
             {
                 inventoryCanvas.gameObject.SetActive(!inventoryCanvas.gameObject.activeInHierarchy);
-            }
+            }*/
+
         }
 
         public void AddItem(string itemName)
         {
             var founded = itemDatabase.ItemDatas.FirstOrDefault(item => item.itemName == itemName);
-            if(founded == null) throw new Exception("해당 아이템은 데이터베이스에 존재하지 않습니다.");
+            if (founded == null) throw new Exception("해당 아이템은 데이터베이스에 존재하지 않습니다.");
 
             if (!_items.ContainsKey(itemName))
             {
@@ -56,7 +58,7 @@
             var foundedSlot = slotUis.FirstOrDefault(item => item.ItemNameText == itemName);
 
             ItemSlotUi itemSlot;
-            
+
             if (foundedSlot == null)
             {
                 var go = Instantiate(slotUiPrefab, slotUiParentTransform);
@@ -66,7 +68,7 @@
             {
                 itemSlot = foundedSlot;
             }
-            
+
             itemSlot.IconImage = founded.icon;
             itemSlot.ItemNameText = founded.itemName;
             itemSlot.ItemAmountText = _items[itemName].Count.ToString();
@@ -77,7 +79,7 @@
             if (!_items.ContainsKey("itemName")) throw new Exception("해당 아이템이 인벤토리에 없습니다.");
 
             var item = _items[itemName][0];
-            
+
             if (item is UsableItem)
             {
                 var usableItem = item as UsableItem;
@@ -86,22 +88,26 @@
             }
             else if (item is QuestItem)
             {
-                
+
             }
-            
+
             var slotUis = slotUiParentTransform.GetComponentsInChildren<ItemSlotUi>();
             var foundedSlot = slotUis.FirstOrDefault(i => i.ItemNameText == itemName);
             foundedSlot.ItemAmountText = _items[itemName].Count.ToString();
-            
+
+            /*
             if (_items[itemName].Count <= 0)
             {
                 _items.Remove(itemName);
                 Destroy(foundedSlot.gameObject);
-            }    
-                
-            
-            
+            }
+            */
+
+
+
         }
-        
+
     }
 }
+
+

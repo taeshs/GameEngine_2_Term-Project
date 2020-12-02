@@ -1,4 +1,4 @@
-namespace Scenes.Data
+namespace Scripts.Data
 {
     using System;
     using System.Collections.Generic;
