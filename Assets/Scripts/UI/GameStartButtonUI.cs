@@ -6,13 +6,14 @@ using KPU.Manager;
 
 namespace Assets.Scripts.UI
 {
-    
-public class GameStartButtonUI : MonoBehaviour
-{
-    public void Clicked()
+
+    public class GameStartButtonUI : MonoBehaviour
     {
-        print("클릭");
-        EventManager.Emit("game_started", null);
+
+        public void Clicked()
+        {
+            print("클릭");
+            EventManager.Emit("game_started", null);
+        }
     }
-}
 }

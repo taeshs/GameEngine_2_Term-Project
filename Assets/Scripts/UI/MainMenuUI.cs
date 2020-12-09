@@ -18,7 +18,13 @@ public class MainMenuUI : MonoBehaviour
 
         private void Show(object obj) => gameObject.SetActive(true); //c#에 이런기능이
 
-        private void Hide(object obj) => gameObject.SetActive(false);
-        
+       // private void Hide(object obj) => gameObject.SetActive(false);
+
+        private void Hide(object obj)
+        {
+            gameObject.SetActive(false);
+        }
+
+
 }
 }
