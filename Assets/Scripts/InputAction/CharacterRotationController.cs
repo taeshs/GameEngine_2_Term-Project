@@ -38,7 +38,7 @@ namespace Assets.Scripts.InputActions
         {
              EventManager.On("game_started", OnGameStart);
             EventManager.On("game_ended", OnGameEnd);
-            gameObject.SetActive(false); // 게임이 시작되면 감춰진 상태로 놓는다
+            //gameObject.SetActive(false); // 게임이 시작되면 감춰진 상태로 놓는다
 
            
         }

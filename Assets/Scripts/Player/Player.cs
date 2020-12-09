@@ -4,6 +4,7 @@ using System.Data;
     using System;
     using System.Collections;
     using System.Linq;
+    using KPU;
     using KPU.Manager;
     using UnityEngine;
     using UnityEngine.AI;
@@ -45,12 +46,13 @@ public class Player : MonoBehaviour, IDamagable
         EventManager.On("game_started", OnGameStart);
         EventManager.On("game_ended", OnGameEnd);
         EventManager.On("exp_added", ExpAdd);
-        gameObject.SetActive(false); // 게임이 시작되면 감춰진 상태로 놓는다
+        //gameObject.SetActive(false); // 게임이 시작되면 감춰진 상태로 놓는다
 
     }
 
     private void OnGameStart(object obj)
     {
+        print("start");
 
             gameObject.SetActive(true);
 
@@ -78,6 +80,10 @@ public class Player : MonoBehaviour, IDamagable
 
     private void Update()
     {
+        if(Hp <=0)
+        {
+        EventManager.Emit("game_ended", null);
+        }
         //var camTowardVector = (transform.position - cam.transform.position).normalized;
         //var finalVector = (camTowardVector * Input.GetAxis("Vertical") +
         //                   cam.transform.right * Input.GetAxis("Horizontal")) * (speed * Time.deltaTime);
@@ -118,5 +124,7 @@ public class Player : MonoBehaviour, IDamagable
 
         material.color = defaultColor;
         _isdamagable = true;
+
+    
     }
 }

@@ -4,19 +4,17 @@ using UnityEngine;
 using KPU;
 using KPU.Manager;
 
-namespace Assets.Scripts.UI
+public class GameOver : MonoBehaviour
 {
-public class MainMenuUI : MonoBehaviour
-{
-    
-     void Start()
-        {
-            EventManager.On("game_started", Hide);
-            EventManager.On("game_ended", Hide);
+    // Start is called before the first frame update
+    void Start()
+    {
+        EventManager.On("game_started", Hide);
+            EventManager.On("game_ended", Show);
             EventManager.On("game_paused", Hide);
-        }
+    }
 
-        private void Show(object obj) => gameObject.SetActive(true); //c#에 이런기능이
+     private void Show(object obj) => gameObject.SetActive(true); //c#에 이런기능이
 
        // private void Hide(object obj) => gameObject.SetActive(false);
 
@@ -25,6 +23,4 @@ public class MainMenuUI : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-
-}
 }
