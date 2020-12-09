@@ -9,7 +9,7 @@
     {
         private void OnEnable()
         {
-            print("sss");
+            //print("sss");
         }
         private void OnTriggerEnter(Collider other)
         {
