@@ -42,8 +42,25 @@ public class Player : MonoBehaviour, IDamagable
 
     private void Start()
     {
+        EventManager.On("game_started", OnGameStart);
+        EventManager.On("game_ended", OnGameEnd);
         EventManager.On("exp_added", ExpAdd);
+        gameObject.SetActive(false); // 게임이 시작되면 감춰진 상태로 놓는다
 
+    }
+
+    private void OnGameStart(object obj)
+    {
+
+            gameObject.SetActive(true);
+
+            //_throwRoutine = StartCoroutine(ShootRoutine());
+    }
+
+    private void OnGameEnd(object obj)
+    {
+            //StopCoroutine(_throwRoutine);
+            gameObject.SetActive(false);
     }
 
 

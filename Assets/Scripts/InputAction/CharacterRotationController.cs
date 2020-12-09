@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using KPU;
+using KPU.Manager;
 
 namespace Assets.Scripts.InputActions
 {
@@ -34,8 +36,27 @@ namespace Assets.Scripts.InputActions
 
         private void Start()
         {
+             EventManager.On("game_started", OnGameStart);
+            EventManager.On("game_ended", OnGameEnd);
+            gameObject.SetActive(false); // 게임이 시작되면 감춰진 상태로 놓는다
+
+           
+        }
+
+          private void OnGameStart(object obj)
+        {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+
+            gameObject.SetActive(true);
+
+            //_throwRoutine = StartCoroutine(ShootRoutine());
+        }
+
+          private void OnGameEnd(object obj)
+        {
+            //StopCoroutine(_throwRoutine);
+            gameObject.SetActive(false);
         }
 
         void OnEnable()
