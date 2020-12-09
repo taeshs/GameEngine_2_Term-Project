@@ -7,6 +7,10 @@
 
     public class Stone : MonoBehaviour
     {
+        private void OnEnable()
+        {
+            print("sss");
+        }
         private void OnTriggerEnter(Collider other)
         {
             print("sss");

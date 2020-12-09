@@ -21,7 +21,7 @@ namespace Scripts.UI
 
             _slider.value = _player.Hp/ _player.MaxHp;
 
-            print(_slider.value);
+            //print(_slider.value);
            
         }
     }
