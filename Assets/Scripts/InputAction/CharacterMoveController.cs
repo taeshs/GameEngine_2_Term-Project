@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using Scripts.Inventory;
 
 namespace Assets.Scripts.InputActions
 {
@@ -91,6 +92,25 @@ namespace Assets.Scripts.InputActions
                 _isJumped = true;
             else
                 _isJumped = false;
+        }
+        public void OnUseItem1(InputAction.CallbackContext context)
+        {
+            print("use stone");
+            InventoryManager.Instance.AddItem("stone");
+        }
+        public void OnUseItem2(InputAction.CallbackContext context)
+        {
+            print("use crystal");
+            InventoryManager.Instance.AddItem("crystal");
+        }
+        public void OnUseItem3(InputAction.CallbackContext context)
+        {
+            print("use stone");
+            InventoryManager.Instance.UseItem("crystal");
+        }
+        public void OnUseItem4(InputAction.CallbackContext context)
+        {
+            print("use stone");
         }
         /*
         public void OnSprint(InputAction.CallbackContext context)

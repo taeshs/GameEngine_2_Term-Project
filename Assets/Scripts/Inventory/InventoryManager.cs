@@ -29,6 +29,10 @@
         private void Awake()
         {
             _items = new Dictionary<string, List<ItemData>>();
+
+            SetItem("stone");
+            SetItem("crystal");
+            SetItem("treasure");
             //itemDatabase.ItemDatas.ForEach( _items.Add(itemDatabase.ItemDatas., new List<ItemData>()));
         }
 
@@ -42,6 +46,36 @@
 
         }
 
+        public void SetItem(string itemName)
+        {
+            var founded = itemDatabase.ItemDatas.FirstOrDefault(item => item.itemName == itemName);
+            if (founded == null) throw new Exception("해당 아이템은 데이터베이스에 존재하지 않습니다.");
+
+
+            _items.Add(itemName, new List<ItemData>());
+
+
+            // slot gameobject가 존재하는지 확인함.
+            var slotUis = slotUiParentTransform.GetComponentsInChildren<ItemSlotUi>();
+            var foundedSlot = slotUis.FirstOrDefault(item => item.ItemNameText == itemName);
+
+            ItemSlotUi itemSlot;
+
+            if (foundedSlot == null)
+            {
+                var go = Instantiate(slotUiPrefab, slotUiParentTransform);
+                itemSlot = go.GetComponent<ItemSlotUi>();
+            }
+            else
+            {
+                itemSlot = foundedSlot;
+            }
+
+            itemSlot.IconImage = founded.icon;
+            itemSlot.ItemNameText = founded.itemName;
+            itemSlot.ItemAmountText = (_items[itemName].Count).ToString();
+        }
+
         public void AddItem(string itemName)
         {
             var founded = itemDatabase.ItemDatas.FirstOrDefault(item => item.itemName == itemName);
@@ -52,6 +86,13 @@
                 _items.Add(itemName, new List<ItemData>());
             }
             _items[itemName].Add(founded);
+
+            if (_items[itemName][0] is QuestItem)               ////////////////// 퀘스트 아이템 획득 이벤트 
+            {
+                print("퀘스트 아이템 획득!");
+                var questItem = _items[itemName][0] as QuestItem;
+                EventManager.Emit(questItem.questName);
+            }
 
             // slot gameobject가 존재하는지 확인함.
             var slotUis = slotUiParentTransform.GetComponentsInChildren<ItemSlotUi>();
@@ -76,24 +117,31 @@
 
         public void UseItem(string itemName)
         {
-            if (!_items.ContainsKey("itemName")) throw new Exception("해당 아이템이 인벤토리에 없습니다.");
+            if (!_items.ContainsKey(itemName)) throw new Exception("해당 아이템이 인벤토리에 없습니다.");
 
             var item = _items[itemName][0];
-
-            if (item is UsableItem)
+            if(_items[itemName].Count > 0)
             {
-                var usableItem = item as UsableItem;
-                EventManager.Emit(usableItem.eventName);
-                _items[itemName].Remove(item);
+                if (item is UsableItem)
+                {
+                    var usableItem = item as UsableItem;
+                    EventManager.Emit(usableItem.eventName);
+                    _items[itemName].Remove(item);
+                }
+                else if (item is QuestItem)
+                {
+
+                }
+
+                var slotUis = slotUiParentTransform.GetComponentsInChildren<ItemSlotUi>();
+                var foundedSlot = slotUis.FirstOrDefault(i => i.ItemNameText == itemName);
+                foundedSlot.ItemAmountText = _items[itemName].Count.ToString();
             }
-            else if (item is QuestItem)
+            else
             {
-
+                print("잔여량이 없음.");
             }
-
-            var slotUis = slotUiParentTransform.GetComponentsInChildren<ItemSlotUi>();
-            var foundedSlot = slotUis.FirstOrDefault(i => i.ItemNameText == itemName);
-            foundedSlot.ItemAmountText = _items[itemName].Count.ToString();
+            
 
             /*
             if (_items[itemName].Count <= 0)
