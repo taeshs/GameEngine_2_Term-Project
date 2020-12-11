@@ -32,6 +32,7 @@
 
             SetItem("stone");
             SetItem("crystal");
+            SetItem("statue");
             SetItem("treasure");
             //itemDatabase.ItemDatas.ForEach( _items.Add(itemDatabase.ItemDatas., new List<ItemData>()));
         }
@@ -117,11 +118,12 @@
 
         public void UseItem(string itemName)
         {
-            if (!_items.ContainsKey(itemName)) throw new Exception("해당 아이템이 인벤토리에 없습니다.");
-
-            var item = _items[itemName][0];
-            if(_items[itemName].Count > 0)
+            //if (!_items.ContainsKey(itemName)) throw new Exception("해당 아이템이 인벤토리에 없습니다.");
+            if (_items[itemName].Count > 0)
             {
+                var item = _items[itemName][0];
+
+                print("잔여량이 있음.");
                 if (item is UsableItem)
                 {
                     var usableItem = item as UsableItem;

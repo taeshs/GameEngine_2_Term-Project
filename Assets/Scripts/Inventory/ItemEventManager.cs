@@ -14,6 +14,7 @@
         {
             EventManager.On("use_crystal", OnUseCrystal);
             EventManager.On("use_stone", OnUseStone);
+            EventManager.On("use_statue", OnUseStatue);
             EventManager.On("get_treasure", OnGetTreasure);
         }
 
@@ -35,7 +36,17 @@
             print("use crystal!!!!!!!!!!!!!!!!!!");
         }
 
-        
+        public void OnUseStatue(object obj)
+        {
+            print("use crystal!!!!!!!!!!!!!!!!!!");
+            var enemies = FindObjectsOfType<Enemy>();
+            foreach (Enemy enemy in enemies)
+            {
+                enemy.setStun();
+            }
+        }
+
+
 
         public void OnGetTreasure(object obj)
         {

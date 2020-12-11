@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 670c24f58a3ddcf41891d0217f5c91a7, type: 3}
-  m_Name: crystal
+  m_Name: statue
   m_EditorClassIdentifier: 
-  itemId: crystal
-  itemName: crystal
-  icon: {fileID: 21300000, guid: cfa91e716fede9a4e8667bb39dfdcc12, type: 3}
-  description: crystal
-  eventName: use_crystal
+  itemId: statue
+  itemName: statue
+  icon: {fileID: 21300000, guid: a9e20d6e14b140a45beca08370fa7fef, type: 3}
+  description: statue
+  eventName: use_statue

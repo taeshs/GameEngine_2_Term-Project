@@ -23,6 +23,9 @@ public class Enemy : MonoBehaviour, IDamagable
     private NavMeshAgent _agent;
     private EnemyState _state;
     private float _attackTimer = 0f;
+
+    private float nowTime = 0.0f;
+
     public float SightLevel => sightLevel;
     public float SightLength => sightLength;
     public float Hp => status.Hp;
@@ -47,6 +50,30 @@ public class Enemy : MonoBehaviour, IDamagable
         StartCoroutine(LifeRoutine());
     }
 
+    public void setStun()
+    {
+        _state = EnemyState.Stun;
+    }
+
+    private void Stun()
+    {
+        print("stun--------");
+
+        if(nowTime < 5.0f)
+        {
+            _agent.isStopped = true;
+            print(nowTime);
+            nowTime += Time.deltaTime;
+        }
+        else
+        {
+            _agent.isStopped = false;
+            _state = EnemyState.Idle;
+        }
+
+        
+    }
+
     private IEnumerator LifeRoutine()
     {
         while (_state != EnemyState.Dead)
@@ -55,6 +82,7 @@ public class Enemy : MonoBehaviour, IDamagable
             else if (_state == EnemyState.Finding) Search();
             else if (_state == EnemyState.Chasing) Chase();
             else if (_state == EnemyState.Attacking) Attack();
+            else if (_state == EnemyState.Stun) Stun();
 
             if (GameManager.Instance.State == State.GameEnded)
             {
@@ -160,11 +188,7 @@ public class Enemy : MonoBehaviour, IDamagable
     }
     public void Damage(float damageAmount)
     {
-        status.AddHp(-damageAmount);
-        if (status.Hp <= 0)
-        {
-            _state = EnemyState.Dead;
-        }
+
     }
 
     private void Update()
