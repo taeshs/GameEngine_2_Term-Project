@@ -12,7 +12,7 @@ namespace Assets.Scripts.UI
 
         public void Clicked()
         {
-            EventManager.Emit("game_started", null);
+            EventManager.Emit("game_started");
         }
     }
 }

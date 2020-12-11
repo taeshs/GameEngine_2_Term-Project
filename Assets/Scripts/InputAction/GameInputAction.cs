@@ -126,7 +126,7 @@ public class @GameInputAction : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e5c52e02-3cb9-454b-84eb-4c8be534d2af"",
-                    ""path"": ""<Keyboard>/i"",
+                    ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -148,7 +148,7 @@ public class @GameInputAction : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""09121c34-bb45-42e4-953f-e01e512c9b3b"",
-                    ""path"": ""<Keyboard>/t"",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -159,7 +159,7 @@ public class @GameInputAction : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9940ad46-f52d-4d39-bc21-dab91a95cf55"",
-                    ""path"": ""<Keyboard>/y"",
+                    ""path"": ""<Keyboard>/2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -170,7 +170,7 @@ public class @GameInputAction : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""fbcdba5c-7cdc-4f65-ae90-afdbda2a0764"",
-                    ""path"": ""<Keyboard>/u"",
+                    ""path"": ""<Keyboard>/3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -322,17 +322,17 @@ public class @GameInputAction : IInputActionCollection, IDisposable
                 @Jump.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnJump;
                 @UseItem1.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem1;
-                @UseItem1.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem1;
-                @UseItem1.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem1;
+                //@UseItem1.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem1;
+                //@UseItem1.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem1;
                 @UseItem2.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem2;
-                @UseItem2.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem2;
-                @UseItem2.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem2;
+                //@UseItem2.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem2;
+                //@UseItem2.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem2;
                 @UseItem3.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem3;
-                @UseItem3.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem3;
-                @UseItem3.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem3;
+                //@UseItem3.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem3;
+                //@UseItem3.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem3;
                 @UseItem4.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem4;
-                @UseItem4.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem4;
-                @UseItem4.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem4;
+                //@UseItem4.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem4;
+                //@UseItem4.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem4;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -344,17 +344,17 @@ public class @GameInputAction : IInputActionCollection, IDisposable
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
                 @UseItem1.started += instance.OnUseItem1;
-                @UseItem1.performed += instance.OnUseItem1;
-                @UseItem1.canceled += instance.OnUseItem1;
+                //@UseItem1.performed += instance.OnUseItem1;
+                //@UseItem1.canceled += instance.OnUseItem1;
                 @UseItem2.started += instance.OnUseItem2;
-                @UseItem2.performed += instance.OnUseItem2;
-                @UseItem2.canceled += instance.OnUseItem2;
+                //@UseItem2.performed += instance.OnUseItem2;
+                //@UseItem2.canceled += instance.OnUseItem2;
                 @UseItem3.started += instance.OnUseItem3;
-                @UseItem3.performed += instance.OnUseItem3;
-                @UseItem3.canceled += instance.OnUseItem3;
+                //@UseItem3.performed += instance.OnUseItem3;
+                //@UseItem3.canceled += instance.OnUseItem3;
                 @UseItem4.started += instance.OnUseItem4;
-                @UseItem4.performed += instance.OnUseItem4;
-                @UseItem4.canceled += instance.OnUseItem4;
+                //@UseItem4.performed += instance.OnUseItem4;
+                //@UseItem4.canceled += instance.OnUseItem4;
             }
         }
     }

@@ -16,4 +16,4 @@ MonoBehaviour:
   itemName: stone
   icon: {fileID: 21300000, guid: 03e162290281da8429bb976d45009f9c, type: 3}
   description: stone
-  eventName: get_stone
+  eventName: use_stone

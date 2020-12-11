@@ -13,7 +13,6 @@
         }
         private void OnTriggerEnter(Collider other)
         {
-            print("sss");
             if (other.CompareTag("Player"))
             {
                 InventoryManager.Instance.AddItem("stone");

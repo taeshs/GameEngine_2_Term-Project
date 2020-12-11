@@ -96,21 +96,22 @@ namespace Assets.Scripts.InputActions
         public void OnUseItem1(InputAction.CallbackContext context)
         {
             print("use stone");
-            InventoryManager.Instance.AddItem("stone");
+            InventoryManager.Instance.UseItem("stone");
         }
         public void OnUseItem2(InputAction.CallbackContext context)
         {
             print("use crystal");
-            InventoryManager.Instance.AddItem("crystal");
+            InventoryManager.Instance.UseItem("crystal");
         }
         public void OnUseItem3(InputAction.CallbackContext context)
         {
-            print("use stone");
-            InventoryManager.Instance.UseItem("crystal");
+            print("use ?");
+            //InventoryManager.Instance.UseItem("crystal");
         }
         public void OnUseItem4(InputAction.CallbackContext context)
         {
-            print("use stone");
+            InventoryManager.Instance.AddItem("crystal");
+            InventoryManager.Instance.AddItem("stone");
         }
         /*
         public void OnSprint(InputAction.CallbackContext context)
