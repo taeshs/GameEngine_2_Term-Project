@@ -16,6 +16,8 @@ public class Player : MonoBehaviour, IDamagable
     [SerializeField] private Stat stat;
     [SerializeField] private float noDamageTime = 0.5f;
 
+    float timer =0.0f;
+
     private NavMeshAgent _agent;
     private PlayerState _state;
     private Coroutine _damageRoutine;
@@ -33,6 +35,8 @@ public class Player : MonoBehaviour, IDamagable
 
     public Stat Stat => stat;
 
+    public float Speed => speed;
+
     public Camera Cam => cam;
 
     private void Awake()
@@ -48,6 +52,14 @@ public class Player : MonoBehaviour, IDamagable
         EventManager.On("exp_added", ExpAdd);
         gameObject.SetActive(false); // 게임이 시작되면 감춰진 상태로 놓는다
 
+    }
+
+    private bool Booster = false;
+
+    public void BoosterOn(){
+        timer = 0.0f;
+        print("ddddddddddddd");
+        Booster = true;
     }
 
     private void OnGameStart(object obj)
@@ -84,6 +96,23 @@ public class Player : MonoBehaviour, IDamagable
         {
         EventManager.Emit("game_ended", null);
         }
+
+        if (Booster)
+        {
+            print(timer);
+            if(timer <5.0f)
+            {
+                timer += Time.deltaTime;
+                speed = 30;
+            }
+            else
+            {
+                Booster = false;
+                speed = 10;
+            }
+  
+        }
+        
         //var camTowardVector = (transform.position - cam.transform.position).normalized;
         //var finalVector = (camTowardVector * Input.GetAxis("Vertical") +
         //                   cam.transform.right * Input.GetAxis("Horizontal")) * (speed * Time.deltaTime);

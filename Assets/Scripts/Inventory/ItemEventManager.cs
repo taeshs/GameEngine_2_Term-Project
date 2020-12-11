@@ -16,6 +16,7 @@
             EventManager.On("use_stone", OnUseStone);
             EventManager.On("use_statue", OnUseStatue);
             EventManager.On("get_treasure", OnGetTreasure);
+            EventManager.On("use_booster", OnUseBooster);
         }
 
 
@@ -52,5 +53,13 @@
         {
             print("get Treasure!!!!!!!!!!!!!!");
         }
+
+         public void OnUseBooster(object obj)
+        {
+            print("use booster!!!!!!!!!!!!!!");
+            player.BoosterOn();
+            print("use booster!!!!!!!!!!!!!11111111111111111111111111!");
+        }
+        
     }
 }
