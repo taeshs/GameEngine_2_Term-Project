@@ -5,18 +5,13 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class Stone : MonoBehaviour
+    public class Treasure : MonoBehaviour
     {
-        private void OnEnable()
-        {
-            //print("sss");
-        }
         private void OnTriggerEnter(Collider other)
         {
-            print("sss");
             if (other.CompareTag("Player"))
             {
-                InventoryManager.Instance.AddItem("stone");
+                InventoryManager.Instance.AddItem("treasure");
                 gameObject.SetActive(false);
             }
         }
