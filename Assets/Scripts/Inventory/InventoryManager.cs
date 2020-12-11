@@ -33,6 +33,7 @@
             SetItem("stone");
             SetItem("crystal");
             SetItem("treasure");
+            SetItem("booster");
             //itemDatabase.ItemDatas.ForEach( _items.Add(itemDatabase.ItemDatas., new List<ItemData>()));
         }
 
@@ -119,9 +120,9 @@
         {
             if (!_items.ContainsKey(itemName)) throw new Exception("해당 아이템이 인벤토리에 없습니다.");
 
-            var item = _items[itemName][0];
             if(_items[itemName].Count > 0)
             {
+                var item = _items[itemName][0];
                 if (item is UsableItem)
                 {
                     var usableItem = item as UsableItem;

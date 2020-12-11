@@ -18,6 +18,7 @@ namespace Assets.Scripts.InputActions
         private const float gravity = -9.81f;
 
 
+        [SerializeField] private Player player;
 
         [SerializeField] private float characterMoveSpeed = 10f;
         [SerializeField] private Transform groundCheckPosition;
@@ -49,6 +50,7 @@ namespace Assets.Scripts.InputActions
 
         void Update()
         {
+            characterMoveSpeed = player.Speed;
             _isGrounded = Physics.CheckSphere(groundCheckPosition.position, groundCheckOffset, groundLayer);
 
             if (_isGrounded)
@@ -105,13 +107,13 @@ namespace Assets.Scripts.InputActions
         }
         public void OnUseItem3(InputAction.CallbackContext context)
         {
-            print("use ?");
-            //InventoryManager.Instance.UseItem("crystal");
+            print("add Booster");
+            InventoryManager.Instance.AddItem("booster");
         }
         public void OnUseItem4(InputAction.CallbackContext context)
         {
-            InventoryManager.Instance.AddItem("crystal");
-            InventoryManager.Instance.AddItem("stone");
+            print("use Booster");
+            InventoryManager.Instance.UseItem("booster");
         }
         /*
         public void OnSprint(InputAction.CallbackContext context)
