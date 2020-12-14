@@ -8,7 +8,8 @@ public class PatrolA : MonoBehaviour
 
     private void Awake()
     {
-        transform.position = _enemy.transform.position - _enemy.PatrolRadius;
+        //transform.position = _enemy.transform.position - _enemy.PatrolRadius;
+        transform.position = _enemy.transform.position - (_enemy.transform.forward * _enemy.PatrolRadius);
     }
 
     private void OnTriggerEnter(Collider other)

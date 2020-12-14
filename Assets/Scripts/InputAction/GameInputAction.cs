@@ -65,6 +65,14 @@ public class @GameInputAction : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Use Item 5"",
+                    ""type"": ""Button"",
+                    ""id"": ""c33a266f-1f2c-4511-b38a-742e50afe5c6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -177,6 +185,17 @@ public class @GameInputAction : IInputActionCollection, IDisposable
                     ""action"": ""Use Item 3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e53b95b3-b427-482e-82f7-3e3a0206fac2"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Use Item 5"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -237,6 +256,7 @@ public class @GameInputAction : IInputActionCollection, IDisposable
         m_Character_UseItem2 = m_Character.FindAction("Use Item 2", throwIfNotFound: true);
         m_Character_UseItem3 = m_Character.FindAction("Use Item 3", throwIfNotFound: true);
         m_Character_UseItem4 = m_Character.FindAction("Use Item 4", throwIfNotFound: true);
+        m_Character_UseItem5 = m_Character.FindAction("Use Item 5", throwIfNotFound: true);
         // MouseMove
         m_MouseMove = asset.FindActionMap("MouseMove", throwIfNotFound: true);
         m_MouseMove_UpDown = m_MouseMove.FindAction("Up/Down", throwIfNotFound: true);
@@ -296,6 +316,7 @@ public class @GameInputAction : IInputActionCollection, IDisposable
     private readonly InputAction m_Character_UseItem2;
     private readonly InputAction m_Character_UseItem3;
     private readonly InputAction m_Character_UseItem4;
+    private readonly InputAction m_Character_UseItem5;
     public struct CharacterActions
     {
         private @GameInputAction m_Wrapper;
@@ -306,6 +327,7 @@ public class @GameInputAction : IInputActionCollection, IDisposable
         public InputAction @UseItem2 => m_Wrapper.m_Character_UseItem2;
         public InputAction @UseItem3 => m_Wrapper.m_Character_UseItem3;
         public InputAction @UseItem4 => m_Wrapper.m_Character_UseItem4;
+        public InputAction @UseItem5 => m_Wrapper.m_Character_UseItem5;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -333,6 +355,9 @@ public class @GameInputAction : IInputActionCollection, IDisposable
                 @UseItem4.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem4;
                 //@UseItem4.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem4;
                 //@UseItem4.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem4;
+                @UseItem5.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem5;
+                //@UseItem5.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem5;
+                //@UseItem5.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnUseItem5;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -354,7 +379,10 @@ public class @GameInputAction : IInputActionCollection, IDisposable
                 //@UseItem3.canceled += instance.OnUseItem3;
                 @UseItem4.started += instance.OnUseItem4;
                 //@UseItem4.performed += instance.OnUseItem4;
-               // @UseItem4.canceled += instance.OnUseItem4;
+                //@UseItem4.canceled += instance.OnUseItem4;
+                @UseItem5.started += instance.OnUseItem5;
+                //@UseItem5.performed += instance.OnUseItem5;
+                //@UseItem5.canceled += instance.OnUseItem5;
             }
         }
     }
@@ -408,6 +436,7 @@ public class @GameInputAction : IInputActionCollection, IDisposable
         void OnUseItem2(InputAction.CallbackContext context);
         void OnUseItem3(InputAction.CallbackContext context);
         void OnUseItem4(InputAction.CallbackContext context);
+        void OnUseItem5(InputAction.CallbackContext context);
     }
     public interface IMouseMoveActions
     {

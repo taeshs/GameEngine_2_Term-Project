@@ -8,7 +8,7 @@
         {
             if (other.CompareTag("Player"))
             {
-                InventoryManager.Instance.AddItem("booster");
+                InventoryManager.Instance.AddItem("rocket");
                 gameObject.SetActive(false);
             }
         }

@@ -12,6 +12,7 @@ public class GameOver : MonoBehaviour
         EventManager.On("game_started", Hide);
             EventManager.On("game_ended", Show);
             EventManager.On("game_paused", Hide);
+        
     }
 
      private void Show(object obj) => gameObject.SetActive(true); //c#에 이런기능이

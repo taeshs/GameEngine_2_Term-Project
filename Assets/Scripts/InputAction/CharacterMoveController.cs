@@ -114,7 +114,15 @@ namespace Assets.Scripts.InputActions
         public void OnUseItem4(InputAction.CallbackContext context)
         {
             print("use Booster");
-            InventoryManager.Instance.UseItem("booster");
+            InventoryManager.Instance.UseItem("rocket");
+        }
+        public void OnUseItem5(InputAction.CallbackContext context)
+        {
+            print("add_items");
+            InventoryManager.Instance.AddItem("stone");
+            InventoryManager.Instance.AddItem("crystal");
+            InventoryManager.Instance.AddItem("statue");
+            InventoryManager.Instance.AddItem("rocket");
         }
         /*
         public void OnSprint(InputAction.CallbackContext context)

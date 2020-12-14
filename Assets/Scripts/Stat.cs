@@ -90,6 +90,11 @@ public struct Stat
         _hp = Mathf.Clamp(_hp + hpAmount, 0, _maxHp);
     }
 
+    public void SetHpFull()
+    {
+        _hp = _maxHp;
+    }
+
     public void AddAlert(float AlertAmount)
     {
         _alert = Mathf.Clamp(_alert + AlertAmount, 0, _maxalert);

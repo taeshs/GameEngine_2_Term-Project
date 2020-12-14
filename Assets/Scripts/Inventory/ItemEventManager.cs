@@ -22,18 +22,18 @@
 
         public void OnUseStone(object obj)
         {
+            player.SetHpFull();
             print("use stone!!!!!!!!!!!!!!!!!!");
-            if(player.Stat.Alert < 99)
-            {
-                float Minus_alert = player.Stat.Alert / 2 * -1.0f;
-                player.AddAlert(Minus_alert);
-            }
-            
         }
 
         public void OnUseCrystal(object obj)
         {
             //player.
+            if (player.Stat.Alert < 99)
+            {
+                float Minus_alert = player.Stat.Alert / 2 * -1.0f;
+                player.AddAlert(Minus_alert);
+            }
             print("use crystal!!!!!!!!!!!!!!!!!!");
         }
 
@@ -43,14 +43,14 @@
             var enemies = FindObjectsOfType<Enemy>();
             foreach (Enemy enemy in enemies)
             {
+                enemy.nowTime = 0.0f;
                 enemy.setStun();
             }
         }
 
-
-
         public void OnGetTreasure(object obj)
         {
+            player.getTreasure();
             print("get Treasure!!!!!!!!!!!!!!");
         }
 

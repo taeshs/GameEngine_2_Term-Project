@@ -52,6 +52,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Use Item 5",
+                    "type": "Button",
+                    "id": "c33a266f-1f2c-4511-b38a-742e50afe5c6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -162,6 +170,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Use Item 3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e53b95b3-b427-482e-82f7-3e3a0206fac2",
+                    "path": "<Keyboard>/7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Use Item 5",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -18,11 +18,13 @@ public class Player : MonoBehaviour, IDamagable
 
     float timer =0.0f;
 
+    private bool isEnd = false;
+
     private NavMeshAgent _agent;
     private PlayerState _state;
     private Coroutine _damageRoutine;
     private bool _isdamagable;
-    private MeshRenderer _renderer;
+    [SerializeField] private MeshRenderer _renderer;
 
     public PlayerState State => _state;
     public float Hp => stat.Hp;
@@ -39,16 +41,19 @@ public class Player : MonoBehaviour, IDamagable
 
     public Camera Cam => cam;
 
+    public bool IsEnd => isEnd;
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
-        _renderer = GetComponent<MeshRenderer>();
+        //_renderer = GetComponent<MeshRenderer>();
     }
 
     private void Start()
     {
         EventManager.On("game_started", OnGameStart);
         EventManager.On("game_ended", OnGameEnd);
+        EventManager.On("game_clear", OnGameEnd);
         EventManager.On("exp_added", ExpAdd);
         gameObject.SetActive(false); // 게임이 시작되면 감춰진 상태로 놓는다
 
@@ -60,6 +65,12 @@ public class Player : MonoBehaviour, IDamagable
         timer = 0.0f;
         print("ddddddddddddd");
         Booster = true;
+    }
+
+    public void getTreasure()
+    {
+        isEnd = true;
+        stat.AddAlert(100);
     }
 
     private void OnGameStart(object obj)
@@ -103,12 +114,12 @@ public class Player : MonoBehaviour, IDamagable
             if(timer <5.0f)
             {
                 timer += Time.deltaTime;
-                speed = 30;
+                speed = 45;
             }
             else
             {
                 Booster = false;
-                speed = 10;
+                speed = 20;
             }
   
         }
@@ -138,6 +149,11 @@ public class Player : MonoBehaviour, IDamagable
     {
         stat.AddAlert(Amount);
         //print(stat.Alert);
+    }
+
+    public void SetHpFull()
+    {
+        stat.SetHpFull();
     }
 
     private IEnumerator DamageRoutine(float damageAmount)

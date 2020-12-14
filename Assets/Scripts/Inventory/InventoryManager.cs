@@ -33,7 +33,7 @@
             SetItem("stone");
             SetItem("crystal");
             SetItem("statue");
-            SetItem("booster");
+            SetItem("rocket");
             SetItem("treasure");
 
             //itemDatabase.ItemDatas.ForEach( _items.Add(itemDatabase.ItemDatas., new List<ItemData>()));

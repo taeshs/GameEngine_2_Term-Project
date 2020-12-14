@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour, IDamagable
     [SerializeField] private LayerMask layerToCast;
     [SerializeField] private Stat status;
     [SerializeField] private Vector3 spawnPosition;
-    [SerializeField] private Vector3 patrolRadius;
+    [SerializeField] private float patrolRadius = 10f;
     [SerializeField] private GameObject patrolA;
     [SerializeField] private GameObject patrolB;
 
@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour, IDamagable
     private EnemyState _state;
     private float _attackTimer = 0f;
 
-    private float nowTime = 0.0f;
+    public float nowTime = 0.0f;
 
     public float SightLevel => sightLevel;
     public float SightLength => sightLength;
@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour, IDamagable
     public bool patrol = true;
 
     public Vector3 SpawnPoint => spawnPosition;
-    public Vector3 PatrolRadius => patrolRadius;
+    public float PatrolRadius => patrolRadius;
 
     private void Awake()
     {
@@ -109,6 +109,11 @@ public class Enemy : MonoBehaviour, IDamagable
             //print("B");
         }
 
+        if(_player.Alert >= _player.Stat.MaxAlert)
+        {
+            _state = EnemyState.Chasing;
+        }
+
         //시야각 로직
 
         var dir = ((_player.transform.position - transform.position).normalized);
@@ -151,7 +156,7 @@ public class Enemy : MonoBehaviour, IDamagable
              }
 
         } 
-        else if (dot <= sightLevel || (_player.transform.position - transform.position).magnitude > sightLength * 2)
+        else if (dot <= sightLevel || (_player.transform.position - transform.position).magnitude > sightLength * 1.2)
         {
             _state = EnemyState.Finding;
         }
@@ -195,7 +200,7 @@ public class Enemy : MonoBehaviour, IDamagable
     {
         if(_player.Alert >= _player.Stat.MaxAlert)
         {
-            _agent.speed = 15;
+            _agent.speed = 30;
         }
     }
 

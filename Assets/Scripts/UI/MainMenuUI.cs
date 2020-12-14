@@ -14,6 +14,7 @@ public class MainMenuUI : MonoBehaviour
             EventManager.On("game_started", Hide);
             EventManager.On("game_ended", Hide);
             EventManager.On("game_paused", Hide);
+            EventManager.On("game_clear", Hide);
         }
 
         private void Show(object obj) => gameObject.SetActive(true); //c#에 이런기능이
