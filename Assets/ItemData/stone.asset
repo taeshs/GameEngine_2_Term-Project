@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemId: stone
   itemName: stone
-  icon: {fileID: 21300000, guid: 03e162290281da8429bb976d45009f9c, type: 3}
+  icon: {fileID: 21300000, guid: 1a5c5876fd5aef8419d4f3e48790e7bb, type: 3}
   description: stone
   eventName: use_stone

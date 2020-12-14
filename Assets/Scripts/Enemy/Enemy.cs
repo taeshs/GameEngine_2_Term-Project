@@ -202,6 +202,7 @@ public class Enemy : MonoBehaviour, IDamagable
         {
             _agent.speed = 30;
         }
+
     }
 
     /*public void Damage(float damageAmount)
